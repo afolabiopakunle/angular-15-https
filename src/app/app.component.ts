@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Data } from './data';
 
 @Component({
   selector: 'app-root',
@@ -15,9 +16,14 @@ export class AppComponent {
 
   ngOnInit() {}
 
-  onCreatePost(postData: { title: string; content: string }) {
+  onCreatePost(postData: Data) {
     // Send Http request
-    console.log(postData);
+    this.http.post('https://angular-15s-default-rtdb.firebaseio.com/posts.json', postData)
+    .subscribe({
+      next:(data) => {
+        console.log(data);
+      }
+    });
   }
 
   onFetchPosts() {
