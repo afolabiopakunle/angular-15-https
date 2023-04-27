@@ -9,6 +9,8 @@ import { map } from 'rxjs';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+
+  isLoading = false;
   loadedPosts: Post[] = [];
 
   constructor(private http: HttpClient) {}
@@ -33,6 +35,7 @@ export class AppComponent {
 
   onFetchPosts() {
     // Send Http request
+    this.isLoading = true;
     this.http
       .get<Post[]>('https://angular-15s-default-rtdb.firebaseio.com/posts.json')
       .pipe(
@@ -48,6 +51,7 @@ export class AppComponent {
       )
       .subscribe({
         next: (response) => {
+        this.isLoading = false
          this.loadedPosts = response;
         },
       });
