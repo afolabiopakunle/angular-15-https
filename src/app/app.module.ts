@@ -4,6 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialsModule } from './angular-materials/angular-materials.module';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -11,6 +13,8 @@ import { AngularMaterialsModule } from './angular-materials/angular-materials.mo
     BrowserModule,
     BrowserAnimationsModule,
     AngularMaterialsModule,
+    HttpClientModule,
+    FormsModule,
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent]
