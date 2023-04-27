@@ -9,7 +9,7 @@ import { map } from 'rxjs';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  loadedPosts = [];
+  loadedPosts: Post[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -48,7 +48,7 @@ export class AppComponent {
       )
       .subscribe({
         next: (response) => {
-          console.log(response);
+         this.loadedPosts = response;
         },
       });
   }
