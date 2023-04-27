@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
-import { Post } from 'src/app/data';
+import { Post } from '../app/data';
 
 @Injectable()
 export class PostService {
