@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Post } from './data';
 import { map } from 'rxjs';
-import { PostService } from 'src/services/post.service';
+import { PostService } from '../services/post.service';
 
 @Component({
   selector: 'app-root',
