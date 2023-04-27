@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Post } from './data';
 import { map } from 'rxjs';
+import { PostService } from 'src/services/post.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,9 @@ export class AppComponent {
   isLoading = false;
   loadedPosts: Post[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+              private postService: PostService,
+    ) {}
 
   ngOnInit() {
     this.onFetchPosts();
@@ -36,19 +39,7 @@ export class AppComponent {
   onFetchPosts() {
     // Send Http request
     this.isLoading = true;
-    this.http
-      .get<Post[]>('https://angular-15s-default-rtdb.firebaseio.com/posts.json')
-      .pipe(
-        map((response) => {
-          const postArray: Post[] = [];
-          for (const key in response) {
-            if (response.hasOwnProperty(key)) {
-              postArray.push({ ...response[key], id: key });
-            }
-          }
-          return postArray;
-        })
-      )
+      this.postService.fetchPosts()
       .subscribe({
         next: (response) => {
         this.isLoading = false
