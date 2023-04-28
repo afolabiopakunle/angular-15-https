@@ -8,6 +8,14 @@ export class PostService {
 
   constructor(private http: HttpClient) { }
 
+  createPost(postData: Post) {
+   return this.http
+    .post(
+      'https://angular-15s-default-rtdb.firebaseio.com/posts.json',
+      postData
+    )
+  }
+
   fetchPosts() {
     return this.http
     .get<Post[]>('https://angular-15s-default-rtdb.firebaseio.com/posts.json')

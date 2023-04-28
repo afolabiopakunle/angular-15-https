@@ -24,11 +24,7 @@ export class AppComponent {
 
   onCreatePost(postData: Post) {
     // Send Http request
-    this.http
-      .post(
-        'https://angular-15s-default-rtdb.firebaseio.com/posts.json',
-        postData
-      )
+    this.postService.createPost(postData)
       .subscribe({
         next: (data) => {
           console.log(data);
@@ -42,7 +38,7 @@ export class AppComponent {
       this.postService.fetchPosts()
       .subscribe({
         next: (response) => {
-        this.isLoading = false
+        this.isLoading = false;
          this.loadedPosts = response;
         },
       });
