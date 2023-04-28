@@ -13,9 +13,10 @@ export class AppComponent {
 
   isLoading = false;
   loadedPosts: Post[] = [];
+  error = null;
 
-  constructor(private http: HttpClient,
-              private postService: PostService,
+
+  constructor(private postService: PostService,
     ) {}
 
   ngOnInit() {
@@ -39,8 +40,13 @@ export class AppComponent {
       .subscribe({
         next: (response) => {
         this.isLoading = false;
+        this.error = null;
          this.loadedPosts = response;
         },
+        error: (error) => {
+          this.error = error;
+          console.log(error);
+        }
       });
   }
 
