@@ -35,11 +35,12 @@ export class PostService {
       headers: new HttpHeaders({
         'Classic-Header': 'Afolabi Opakunle'
       }),
-      params: customParams
-    }
+      params: customParams,
+    },
     )
     .pipe(
       map((response) => {
+        console.log(response)
         const postArray: Post[] = [];
         for (const key in response) {
           if (response.hasOwnProperty(key)) {

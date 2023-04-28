@@ -4,9 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialsModule } from './angular-materials/angular-materials.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { PostService } from '../services/post.service';
+import { InterceptorService } from './interceptor.service';
 
 @NgModule({
   imports: [
@@ -19,6 +20,12 @@ import { PostService } from '../services/post.service';
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
-  providers: [PostService]
+  providers: [
+    PostService,
+    {provide: HTTP_INTERCEPTORS,
+    useClass: InterceptorService,
+    multi: true,
+  },
+  ]
 })
 export class AppModule { }
