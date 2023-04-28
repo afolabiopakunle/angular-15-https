@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { map, Subject, Subscription } from 'rxjs';
 import { Post } from '../app/data';
@@ -27,12 +27,15 @@ export class PostService {
   }
 
   fetchPosts() {
+    let customParams = new HttpParams();
+    customParams = customParams.append('print', 'pretty');
     return this.http
     .get<Post[]>('https://angular-15s-default-rtdb.firebaseio.com/posts.json',
     {
       headers: new HttpHeaders({
         'Classic-Header': 'Afolabi Opakunle'
-      })
+      }),
+      params: customParams
     }
     )
     .pipe(
