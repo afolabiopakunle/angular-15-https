@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { map, Subject, Subscription } from 'rxjs';
 import { Post } from '../app/data';
@@ -28,7 +28,13 @@ export class PostService {
 
   fetchPosts() {
     return this.http
-    .get<Post[]>('https://angular-15s-default-rtdb.firebaseio.com/posts.json')
+    .get<Post[]>('https://angular-15s-default-rtdb.firebaseio.com/posts.json',
+    {
+      headers: new HttpHeaders({
+        'Classic-Header': 'Afolabi Opakunle'
+      })
+    }
+    )
     .pipe(
       map((response) => {
         const postArray: Post[] = [];
