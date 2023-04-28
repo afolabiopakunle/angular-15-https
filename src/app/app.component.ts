@@ -27,7 +27,7 @@ export class AppComponent {
     this.postService.createPost(postData)
       .subscribe({
         next: (data) => {
-          console.log(data);
+          this.onFetchPosts();
         },
       });
   }
@@ -46,5 +46,8 @@ export class AppComponent {
 
   onClearPosts() {
     // Send Http request
+    this.postService.deletePosts()
+    .subscribe(value => this.loadedPosts = []
+    )
   }
 }

@@ -31,4 +31,8 @@ export class PostService {
       })
     )
   }
+
+  deletePosts() {
+    return this.http.delete(`https://angular-15s-default-rtdb.firebaseio.com/posts.json`)
+  }
 }
