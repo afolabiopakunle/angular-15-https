@@ -1,19 +1,29 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { Injectable, OnDestroy, OnInit } from '@angular/core';
+import { map, Subject, Subscription } from 'rxjs';
 import { Post } from '../app/data';
 
 @Injectable()
 export class PostService {
 
+  error = new Subject<string>();
+
   constructor(private http: HttpClient) { }
 
   createPost(postData: Post) {
-   return this.http
+   this.http
     .post(
       'https://angular-15s-default-rtdb.firebaseio.com/posts.json',
       postData
     )
+    .subscribe({
+      next: (response) => {
+        console.log(response)
+      },
+      error: (error) => {
+        this.error.next(error)
+      }
+    })
   }
 
   fetchPosts() {
@@ -35,4 +45,5 @@ export class PostService {
   deletePosts() {
     return this.http.delete(`https://angular-15s-default-rtdb.firebaseio.com/posts.json`)
   }
+
 }
